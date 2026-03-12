@@ -1,0 +1,1279 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sanzio Rafael | IA e Automação</title>
+  <meta name="description" content="Soluções de IA e automação para operações comerciais. Assistentes de WhatsApp, integrações, dashboards e processos inteligentes." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    @font-face {
+      font-family: 'Conthrax';
+      src: local('Conthrax'), local('Conthrax Regular');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'Conthrax';
+      src: local('Conthrax Bold'), local('Conthrax SemiBold');
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    :root {
+      --bg: #040814;
+      --bg-2: #081120;
+      --bg-3: #0b1730;
+      --card: rgba(255,255,255,0.05);
+      --card-strong: rgba(10, 19, 38, 0.72);
+      --card-border: rgba(255,255,255,0.12);
+      --text: #f4f7fb;
+      --muted: #aebbd0;
+      --primary: #38e0b8;
+      --primary-2: #21b893;
+      --accent: #63a8ff;
+      --line: rgba(255,255,255,0.08);
+      --shadow: 0 24px 80px rgba(0,0,0,0.34);
+      --radius-xl: 32px;
+      --radius-lg: 22px;
+      --radius-md: 16px;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(56, 224, 184, 0.12), transparent 22%),
+        radial-gradient(circle at 85% 10%, rgba(99, 168, 255, 0.18), transparent 25%),
+        linear-gradient(180deg, #030712 0%, #07101d 42%, #081324 100%);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 42px 42px;
+      mask-image: radial-gradient(circle at center, black 35%, transparent 85%);
+      opacity: 0.35;
+      z-index: 0;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      width: min(calc(100% - 40px), var(--max));
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 11px 16px;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 999px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03));
+      color: #d9e7f5;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      backdrop-filter: blur(14px);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(16px);
+      background: rgba(3, 8, 18, 0.72);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 78px;
+      gap: 20px;
+    }
+
+    .brand {
+      font-family: 'Conthrax', 'Space Grotesk', 'Inter', sans-serif;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    .brand-mark {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(56, 224, 184, 0.95), rgba(67, 117, 255, 0.95));
+      display: grid;
+      place-items: center;
+      box-shadow: 0 12px 30px rgba(56,224,184,0.16);
+      font-weight: 800;
+      color: #06121a;
+    }
+
+    .brand small {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      margin-top: 4px;
+      text-transform: none;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      color: #d8e2f0;
+      font-size: 15px;
+    }
+
+    .nav-links a {
+      position: relative;
+      opacity: 0.9;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -8px;
+      width: 0;
+      height: 1px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      transition: width 0.25s ease;
+    }
+
+    .nav-links a:hover::after { width: 100%; }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 22px;
+      border-radius: 14px;
+      border: 1px solid transparent;
+      font-weight: 700;
+      transition: 0.25s ease;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 34px rgba(0,0,0,0.18);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      color: #04120f;
+      box-shadow: 0 14px 30px rgba(31,199,161,0.18);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.04);
+      color: var(--text);
+      border-color: rgba(255,255,255,0.09);
+    }
+
+    .hero {
+      padding: 76px 0 48px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before,
+    .hero::after {
+      content: '';
+      position: absolute;
+      border-radius: 999px;
+      filter: blur(40px);
+      pointer-events: none;
+    }
+
+    .hero::before {
+      width: 420px;
+      height: 420px;
+      right: -120px;
+      top: 30px;
+      background: rgba(72, 119, 255, 0.16);
+    }
+
+    .hero::after {
+      width: 360px;
+      height: 360px;
+      left: -100px;
+      top: 120px;
+      background: rgba(56, 224, 184, 0.1);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.02fr 0.98fr;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .hero-copy h1 {
+      font-family: 'Conthrax', 'Space Grotesk', 'Inter', sans-serif;
+      text-transform: uppercase;
+      font-size: clamp(40px, 5.8vw, 74px);
+      line-height: 0.96;
+      margin: 18px 0 18px;
+      letter-spacing: 0.02em;
+      max-width: 780px;
+      text-wrap: balance;
+      text-align: center;
+    }
+
+    .hero-copy h1 span {
+      background: linear-gradient(135deg, #ffffff 20%, #8acbff 50%, #51f1c6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-copy {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .hero-copy p {
+      font-size: 20px;
+      line-height: 1.7;
+      color: var(--muted);
+      max-width: 660px;
+      margin: 0 0 28px;
+      text-align: center;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 28px;
+      justify-content: center;
+    }
+
+    .hero-points {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      max-width: 700px;
+    }
+
+    .point {
+      padding: 16px 18px;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.025));
+      color: #dce7f5;
+      font-size: 15px;
+      line-height: 1.62;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    .hero-visual {
+      position: relative;
+      min-height: 680px;
+      display: flex;
+      align-items: end;
+      justify-content: center;
+    }
+
+    .hero-glow {
+      position: absolute;
+      inset: 8% 12% 12% 12%;
+      background: radial-gradient(circle, rgba(71,130,255,0.28) 0%, rgba(56,224,184,0.08) 40%, transparent 72%);
+      filter: blur(16px);
+      z-index: 0;
+    }
+
+    .hero-card {
+      position: absolute;
+      top: 9%;
+      right: -1%;
+      width: 260px;
+      padding: 18px;
+      background: rgba(6, 14, 28, 0.68);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 20px;
+      backdrop-filter: blur(14px);
+      box-shadow: var(--shadow);
+      z-index: 2;
+    }
+
+    .hero-card strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      color: #f4f8ff;
+      text-transform: uppercase;
+      font-family: 'Conthrax', 'Space Grotesk', 'Inter', sans-serif;
+    }
+
+    .hero-card span {
+      display: block;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .hero-image-wrap {
+      position: relative;
+      z-index: 1;
+      width: min(100%, 560px);
+      height: 680px;
+      display: flex;
+      align-items: end;
+      justify-content: center;
+      border-radius: 34px;
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.025)),
+        radial-gradient(circle at 50% 18%, rgba(83,145,255,0.18), transparent 30%),
+        linear-gradient(180deg, rgba(7,16,31,0.88), rgba(5,12,24,0.98));
+      border: 1px solid rgba(255,255,255,0.09);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-image-wrap::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 32px 32px;
+      opacity: 0.5;
+      z-index: 0;
+    }
+
+    .hero-image-wrap::after {
+      content: '';
+      position: absolute;
+      inset: auto 0 0 0;
+      height: 32%;
+      background: linear-gradient(180deg, transparent, rgba(3,8,18,0.82));
+      z-index: 1;
+    }
+
+    .hero-image-wrap img {
+      position: relative;
+      z-index: 2;
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0 28px 56px rgba(0,0,0,0.42));
+    }
+
+    section {
+      padding: 38px 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-head {
+      margin-bottom: 24px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .section-head h2 {
+      font-family: 'Conthrax', 'Space Grotesk', 'Inter', sans-serif;
+      text-transform: uppercase;
+      margin: 0 0 14px;
+      font-size: clamp(32px, 5.5vw, 64px);
+      letter-spacing: 0.03em;
+      line-height: 1.06;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+      text-wrap: balance;
+      max-width: 900px;
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.75;
+      max-width: 640px;
+      text-wrap: balance;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .service-card,
+    .info-card,
+    .step,
+    .cta-box {
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius-lg);
+      backdrop-filter: blur(16px);
+      box-shadow: var(--shadow);
+      height: 100%;
+    }
+
+    .service-card {
+      padding: 30px;
+      min-height: 260px;
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .service-card:hover,
+    .step:hover,
+    .info-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(99,168,255,0.18);
+      box-shadow: 0 28px 80px rgba(0,0,0,0.28);
+    }
+
+    .service-card .icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, rgba(56,224,184,0.16), rgba(99,168,255,0.16));
+      margin-bottom: 18px;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .service-card .icon img {
+      width: 28px;
+      height: 28px;
+      object-fit: contain;
+      opacity: 0.95;
+    }
+
+    .service-card h3 {
+      font-family: 'Conthrax', 'Space Grotesk', 'Inter', sans-serif;
+      text-transform: uppercase;
+      margin: 0 0 12px;
+      font-size: 19px; 
+      line-height: 1.35;
+      letter-spacing: 0.03em;
+      min-height: 56px;
+      display: flex;
+      align-items: center; 
+      justify-content: flex-start;
+      width: 100%;
+    }
+
+    .service-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 16px;
+    }
+
+    .audience {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .info-card {
+      padding: 26px;
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .info-card h3 {
+      font-family: 'Conthrax', 'Space Grotesk', 'Inter', sans-serif;
+      text-transform: uppercase;
+      margin: 0 0 14px;
+      font-size: 22px;
+      letter-spacing: 0.03em;
+      line-height: 1.24;
+      padding-right: 2px;
+      min-height: 28px;
+      display: flex;
+      align-items: flex-start;
+    }
+
+    .list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .list-item {
+      display: flex;
+      gap: 12px;
+      color: #dce7f5;
+      line-height: 1.65;
+      align-items: flex-start;
+    }
+
+    .list-item i {
+      font-style: normal;
+      color: var(--primary);
+      font-weight: 800;
+      margin-top: 1px;
+      min-width: 10px;
+    }
+
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .step {
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .step::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(99,168,255,0.45), transparent);
+      opacity: 0.7;
+    }
+
+    .step-number {
+      display: inline-flex;
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, rgba(56,224,184,0.18), rgba(99,168,255,0.18));
+      font-weight: 800;
+      margin-bottom: 16px;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .step h3 {
+      font-family: 'Conthrax', 'Space Grotesk', 'Inter', sans-serif;
+      text-transform: uppercase;
+      margin: 0 0 10px;
+      font-size: 22px;
+      letter-spacing: 0.03em;
+      line-height: 1.24;
+      padding-right: 2px;
+      min-height: 28px;
+      display: flex;
+      align-items: flex-start;
+    }
+
+    .step p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.72;
+    }
+
+    .stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .stack span {
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.04);
+      color: #dce7f5;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .cta {
+      padding: 50px 0 84px;
+    }
+
+    .cta-box {
+      padding: 56px 48px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 28px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03)),
+        linear-gradient(135deg, rgba(56,224,184,0.05), rgba(99,168,255,0.06));
+    }
+
+    .cta-box h2 {
+      font-family: 'Conthrax', 'Space Grotesk', 'Inter', sans-serif;
+      text-transform: uppercase;
+      margin: 0 0 14px;
+      font-size: clamp(32px, 5.5vw, 62px);
+      letter-spacing: 0.03em;
+      line-height: 1.06;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+      text-wrap: balance;
+      max-width: 860px;
+    }
+
+    .cta-box p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.75;
+      font-size: 16px;
+      max-width: 560px;
+      text-wrap: balance;
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 24px 0 36px;
+      color: var(--muted);
+      font-size: 14px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .mobile-toggle {
+      display: none;
+    }
+
+    .whatsapp-float {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 90;
+      width: 68px;
+      height: 68px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      background: linear-gradient(135deg, rgba(56,224,184,0.16), rgba(99,168,255,0.16));
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: 0 18px 44px rgba(0,0,0,0.34);
+      backdrop-filter: blur(12px);
+      overflow: hidden;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .whatsapp-float:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 24px 54px rgba(0,0,0,0.42);
+    }
+
+    .whatsapp-float img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    @media (max-width: 1080px) {
+      .hero-grid,
+      .audience,
+      .process-grid,
+      .cta-box {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-visual {
+        min-height: auto;
+      }
+
+      .hero-image-wrap {
+        height: auto;
+        min-height: 480px;
+      }
+
+      .hero-card {
+        top: 18px;
+        right: 18px;
+      }
+    }
+
+    @media (max-width: 860px) {
+      .nav-links,
+      .nav-actions .btn-secondary {
+        display: none;
+      }
+
+      .mobile-toggle {
+        display: inline-flex;
+      }
+
+      .hero {
+        padding: 34px 0 22px;
+      }
+
+      .hero-grid,
+      .services-grid,
+      .audience,
+      .process-grid,
+      .hero-points,
+      .cta-box {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-grid {
+        gap: 22px;
+      }
+
+      .hero-copy {
+        order: 2;
+      }
+
+      .hero-visual {
+        order: 1;
+        min-height: auto;
+      }
+
+      .hero-copy p,
+      .section-head p,
+      .cta-box p {
+        font-size: 16px;
+        line-height: 1.65;
+      }
+
+      .hero-image-wrap {
+        width: 100%;
+        max-width: 100%;
+        min-height: 420px;
+        height: 420px;
+        border-radius: 26px;
+      }
+
+      .hero-card {
+        top: 14px;
+        right: 14px;
+        width: 220px;
+        padding: 16px;
+      }
+
+      .section-head {
+        margin-bottom: 18px;
+      }
+
+      .service-card,
+      .info-card,
+      .step,
+      .cta-box {
+        padding: 22px;
+      }
+
+      .stack {
+        gap: 10px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        width: min(calc(100% - 20px), var(--max));
+      }
+
+      header {
+        position: sticky;
+      }
+
+      .nav {
+        min-height: 68px;
+        gap: 12px;
+      }
+
+      .brand {
+        gap: 10px;
+      }
+
+      .brand-mark {
+        width: 38px;
+        height: 38px;
+        border-radius: 12px;
+        font-size: 14px;
+      }
+
+      .brand span {
+        display: block;
+        font-size: 13px;
+        line-height: 1.05;
+        letter-spacing: 0.04em;
+      }
+
+      .brand small {
+        font-size: 10px;
+        letter-spacing: 0.04em;
+        margin-top: 2px;
+      }
+
+      .nav-actions {
+        gap: 8px;
+      }
+
+      .nav-actions .btn-primary {
+        padding: 11px 14px;
+        font-size: 13px;
+        border-radius: 12px;
+      }
+
+      .mobile-toggle {
+        padding: 11px 14px;
+        font-size: 13px;
+        border-radius: 12px;
+      }
+
+      .hero {
+        padding: 20px 0 12px;
+      }
+
+      .badge {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+        padding: 10px 12px;
+        font-size: 11px;
+        line-height: 1.35;
+        letter-spacing: 0.06em;
+      }
+
+      .hero-grid {
+        gap: 16px;
+      }
+
+      .hero-copy h1 {
+        font-size: 29px;
+        line-height: 1.02;
+        letter-spacing: 0.015em;
+        margin: 14px 0 14px;
+      }
+
+      .hero-copy p {
+        font-size: 15px;
+        line-height: 1.62;
+        margin-bottom: 18px;
+      }
+
+      .btn {
+        width: 100%;
+        min-height: 48px;
+        padding: 14px 16px;
+        font-size: 15px;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 16px;
+      }
+
+      .hero-points {
+        gap: 10px;
+      }
+
+      .point {
+        padding: 16px;
+        font-size: 14px;
+        line-height: 1.5;
+        border-radius: 15px;
+      }
+
+      .hero-visual {
+        padding-top: 2px;
+      }
+
+      .hero-image-wrap {
+        min-height: 360px;
+        height: 360px;
+        border-radius: 22px;
+      }
+
+      .hero-image-wrap img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+
+      .hero-card {
+        position: absolute;
+        left: 12px;
+        right: 12px;
+        top: auto;
+        bottom: 12px;
+        width: auto;
+        margin-bottom: 0;
+        padding: 14px;
+        border-radius: 16px;
+        background: rgba(6, 14, 28, 0.82);
+      }
+
+      section {
+        padding: 24px 0;
+      }
+
+      .section-head h2 {
+        font-size: 24px;
+        line-height: 1.08;
+        margin-bottom: 10px;
+      }
+
+      .section-head p {
+        font-size: 15px;
+        line-height: 1.62;
+      }
+
+      .service-card,
+      .info-card,
+      .step,
+      .cta-box {
+        padding: 22px;
+        border-radius: 18px;
+      }
+
+      .service-card {
+        min-height: 290px;
+      }
+
+      .service-card .icon {
+        width: 46px;
+        height: 46px;
+        margin-bottom: 14px;
+      }
+
+      .service-card h3,
+      .info-card h3,
+      .step h3 {
+        font-size: 16px;
+        line-height: 1.25;
+        margin-bottom: 10px;
+        min-height: 46px;
+      }
+
+      .service-card p,
+      .step p,
+      .cta-box p,
+      .list-item,
+      .stack span {
+        font-size: 14px;
+      }
+
+      .list {
+        gap: 10px;
+      }
+
+      .step-number {
+        width: 40px;
+        height: 40px;
+        border-radius: 12px;
+        margin-bottom: 14px;
+      }
+
+      .stack {
+        margin-top: 16px;
+        gap: 8px;
+      }
+
+      .stack span {
+        padding: 8px 12px;
+      }
+
+      .cta {
+        padding: 28px 0 52px;
+      }
+
+      .cta-box {
+        gap: 18px;
+      }
+
+      .cta-box h2 {
+        font-size: 24px;
+        line-height: 1.1;
+        margin-bottom: 10px;
+      }
+
+      footer {
+        padding: 20px 0 28px;
+        font-size: 12px;
+      }
+
+      .whatsapp-float {
+        right: 14px;
+        bottom: 14px;
+        width: 60px;
+        height: 60px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a href="#top" class="brand">
+        <div class="brand-mark">SR</div>
+        <div>
+          <span>SANZIO RAFAEL</span>
+          <small>IA e Automação</small>
+        </div>
+      </a>
+
+      <nav class="nav-links">
+        <a href="#solucoes">Soluções</a>
+        <a href="#para-quem">Para quem</a>
+        <a href="#como-funciona">Como funciona</a>
+        <a href="#contato">Contato</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a class="btn btn-secondary" href="#solucoes">Ver soluções</a>
+        <button class="btn btn-secondary mobile-toggle">Menu</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <div class="badge">IA aplicada, automação e integrações para negócios</div>
+          <h1>Soluções de <span>IA e automação</span> para operações comerciais</h1>
+          <p>
+            Implemento assistentes, integrações e fluxos inteligentes para empresas que querem
+            reduzir trabalho manual, ganhar velocidade e melhorar atendimento, vendas e gestão.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#contato">Solicitar diagnóstico</a>
+            <a class="btn btn-secondary" href="#solucoes">Ver soluções</a>
+          </div>
+
+          <div class="hero-points">
+            <div class="point">Assistentes de WhatsApp para atendimento e orçamento</div>
+            <div class="point">Integrações entre planilhas, APIs, CRM e sistemas</div>
+            <div class="point">Dashboards e relatórios para tomada de decisão</div>
+            <div class="point">Estruturação de funis, rotinas e automações comerciais</div>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="hero-glow"></div>
+          <div class="hero-card">
+            <strong>Posicionamento</strong>
+            <span>Consultoria prática com foco em implementação, produtividade e resultado real de negócio.</span>
+          </div>
+          <div class="hero-image-wrap">
+            <img src="https://i.ibb.co/rKvCmhDx/Foto-perfil.png" alt="Foto de Sanzio Rafael" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="solucoes">
+      <div class="container">
+        <div class="section-head">
+          <h2>O que posso implementar no seu negócio</h2>
+          <p>
+            Estruturo soluções sob medida para operações que querem atender melhor,
+            vender com mais consistência e dar à equipe mais tempo para o que exige atenção humana.
+          </p>
+        </div>
+
+        <div class="services-grid">
+          <article class="service-card">
+            <div class="icon"><img src="https://i.ibb.co/hJg0yMMp/Assistente-whats.png" alt="WhatsApp" /></div>
+            <h3>Assistente de WhatsApp</h3>
+            <p>Atendimento inteligente, triagem, orçamentos, captação, reativação e apoio comercial com fluxos bem definidos.</p>
+          </article>
+
+          <article class="service-card">
+            <div class="icon"><img src="https://i.ibb.co/hFYSRz9p/Automa-o-de-processos.png" alt="Automação" /></div>
+            <h3>Automação de processos</h3>
+            <p>Redução de tarefas repetitivas com integrações, gatilhos, validações e rotinas que economizam tempo da equipe.</p>
+          </article>
+
+          <article class="service-card">
+            <div class="icon"><img src="https://i.ibb.co/h19PnRRm/Integra-es-entre-sistemas.png" alt="Integrações" /></div>
+            <h3>Integrações entre sistemas, planilhas e APIs</h3>
+            <p>Conecto ferramentas para centralizar dados e fazer a operação fluir com menos retrabalho e menos ruído.</p>
+          </article>
+
+          <article class="service-card">
+            <div class="icon"><img src="https://i.ibb.co/60WLzcbY/Dashboards-e-relatorios.png" alt="Dashboards" /></div>
+            <h3>Dashboards e relatórios</h3>
+            <p>Transformo dados operacionais em visualizações mais úteis para gestão, acompanhamento e tomada de decisão.</p>
+          </article>
+
+          <article class="service-card">
+            <div class="icon"><img src="https://i.ibb.co/nsnbCZ8g/Funis-e-rotinas.png" alt="Processos" /></div>
+            <h3>Funis e rotinas operacionais</h3>
+            <p>Organizo processos comerciais, follow-up, prioridades e jornadas para criar previsibilidade na operação.</p>
+          </article>
+
+          <article class="service-card">
+            <div class="icon"><img src="https://i.ibb.co/kgsmRWB5/IA-Aplicada.png" alt="IA" /></div>
+            <h3>IA aplicada ao negócio</h3>
+            <p>Uso IA para dar suporte real à equipe, acelerar resposta, consulta de informação e padronização operacional.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="para-quem">
+      <div class="container audience">
+        <div class="info-card">
+          <div class="section-head">
+            <h2>Para quem é</h2>
+            <p>Projetos ideais para empresas e operações que precisam organizar melhor o comercial e ganhar eficiência.</p>
+          </div>
+          <div class="list">
+            <div class="list-item"><i>•</i><span>Distribuidoras e operações com alto volume de pedidos e consultas</span></div>
+            <div class="list-item"><i>•</i><span>Autocenters e negócios que precisam melhorar atendimento, orçamento e gestão</span></div>
+            <div class="list-item"><i>•</i><span>Empresas com processo manual, planilhas soltas e ferramentas sem integração</span></div>
+            <div class="list-item"><i>•</i><span>Times que precisam responder mais rápido sem perder qualidade</span></div>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <div class="section-head">
+            <h2>Minha abordagem</h2>
+            <p>Meu foco é transformar boas ideias em soluções práticas, com implementação real e evolução contínua do seu negócio.</p>
+          </div>
+          <div class="list">
+            <div class="list-item"><i>•</i><span>Diagnóstico do cenário atual e dos gargalos reais</span></div>
+            <div class="list-item"><i>•</i><span>Desenho da solução com base em prioridade e impacto</span></div>
+            <div class="list-item"><i>•</i><span>Implementação técnica conectada ao contexto do negócio</span></div>
+            <div class="list-item"><i>•</i><span>Ajustes, testes e evolução da operação</span></div>
+          </div>
+
+          <div class="stack">
+            <span>n8n</span>
+            <span>Supabase</span>
+            <span>WhatsApp</span>
+            <span>APIs</span>
+            <span>Dashboards</span>
+            <span>Automação comercial</span>
+            <span>CRM</span>
+            <span>Instagram</span>
+            <span>GoHighLevel</span>
+            <span>Vercel</span>
+            <span>GitHub</span>
+            <span>Resend</span>
+            <span>Webhooks</span>
+            <span>Bancos de dados</span>
+            <span>Integrações sob medida</span>
+            <span>Funis de atendimento</span>
+            <span>Relatórios gerenciais</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="como-funciona">
+      <div class="container">
+        <div class="section-head">
+          <h2>Como funciona</h2>
+          <p>Processo enxuto para sair do problema real até a solução implementada com mais clareza e controle.</p>
+        </div>
+
+        <div class="process-grid">
+          <article class="step">
+            <div class="step-number">1</div>
+            <h3>Diagnóstico</h3>
+            <p>Mapeio o cenário atual, os gargalos e os pontos onde a automação realmente gera valor.</p>
+          </article>
+
+          <article class="step">
+            <div class="step-number">2</div>
+            <h3>Estratégia</h3>
+            <p>Defino a arquitetura da solução, o fluxo ideal e as prioridades de implementação.</p>
+          </article>
+
+          <article class="step">
+            <div class="step-number">3</div>
+            <h3>Implementação</h3>
+            <p>Construo integrações, assistentes, automações e dashboards de forma conectada ao negócio.</p>
+          </article>
+
+          <article class="step">
+            <div class="step-number">4</div>
+            <h3>Otimização</h3>
+            <p>Acompanho ajustes, evolução do processo e novas oportunidades de ganho operacional.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta" id="contato">
+      <div class="container">
+        <div class="cta-box">
+          <div>
+            <h2>Quer entender como aplicar IA e automação no seu negócio?</h2>
+            <p>
+              Podemos começar com um diagnóstico prático para identificar gargalos,
+              oportunidades e o melhor caminho para implementar uma solução útil de verdade.
+            </p>
+          </div>
+          <div style="display:flex; gap:12px; flex-wrap:wrap; justify-content:center;">
+            <a class="btn btn-primary" href="https://wa.me/553431995915?text=Ol%C3%A1%2C%20vim%20pela%20landing%20page%20do%20Sanzio%20Rafael%20e%20quero%20entender%20como%20voc%C3%AA%20pode%20me%20ajudar%20com%20IA%20e%20automa%C3%A7%C3%A3o." target="_blank" rel="noopener">Falar no WhatsApp</a>
+            <a class="btn btn-secondary" href="mailto:contato@seudominio.com">Enviar e-mail</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      © 2026 Sanzio Rafael · IA e Automação · Todos os direitos reservados.
+    </div>
+  </footer>
+
+  <a class="whatsapp-float" href="https://wa.me/553431995915?text=Ol%C3%A1%2C%20vim%20pela%20landing%20page%20do%20Sanzio%20Rafael%20e%20quero%20entender%20como%20voc%C3%AA%20pode%20me%20ajudar%20com%20IA%20e%20automa%C3%A7%C3%A3o." target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
+    <img src="https://i.ibb.co/yFB7Z8Z4/whats-flutuante.png" alt="WhatsApp Flutuante" />
+  </a>
+</body>
+</html>
